@@ -1,5 +1,5 @@
 {
-  "name": "default-react-project",
+  "name": "team-roster",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -110,5 +110,5 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "https://amandaharlin.github.io/default-react-project"
+  "homepage": "https://amandaharlin.github.io/team-roster"
 }
