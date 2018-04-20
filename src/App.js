@@ -16,6 +16,7 @@ import {
 
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
+this.state = { mockTeamPlayers };
 class Pez extends Component {
   render() {
     const isActive = true;
@@ -46,6 +47,26 @@ class App extends Component {
   };
 
   renderRosterTable = () => {
+    const employeeToRow = mockTeamPlayers.map((employee, i) => {
+      return (
+        <Table.Row textAlign="center">
+          <Table.Cell collapsing>
+            <Pez color="red" />
+          </Table.Cell>
+          <Table.Cell collapsing>
+            <Pez color="green" />
+          </Table.Cell>
+          <Table.Cell collapsing>
+            <Pez color="blue" />
+          </Table.Cell>
+          <Table.Cell>
+            {employee.name.first} {employee.name.last}
+          </Table.Cell>
+          <Table.Cell>{employee.department}</Table.Cell>
+        </Table.Row>
+      );
+    });
+
     return (
       <div>
         <Header>Roster List</Header>
@@ -59,21 +80,7 @@ class App extends Component {
               <Table.HeaderCell>Department</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>
-            <Table.Row textAlign="center">
-              <Table.Cell collapsing>
-                <Pez color="red" />
-              </Table.Cell>
-              <Table.Cell collapsing>
-                <Pez color="green" />
-              </Table.Cell>
-              <Table.Cell collapsing>
-                <Pez color="blue" />
-              </Table.Cell>
-              <Table.Cell>Yolanda</Table.Cell>
-              <Table.Cell>Sales</Table.Cell>
-            </Table.Row>
-          </Table.Body>
+          <Table.Body>{employeeToRow}</Table.Body>
         </Table>
       </div>
     );
@@ -139,14 +146,6 @@ class App extends Component {
   };
 
   render() {
-    mockTeamPlayers.forEach(function(player) {
-      console.log(
-        player.name.first,
-        player.name.last,
-        " ~ ",
-        player.department
-      );
-    });
     return (
       <Container className="App">
         <Divider hidden />
