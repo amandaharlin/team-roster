@@ -16,6 +16,23 @@ import {
 
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
+class Pez extends Component {
+  render() {
+    const isActive = true;
+    return (
+      <Button
+        color="red"
+        basic={!isActive}
+        checked={isActive}
+        onClick={(event, data) => {
+          const { checked } = data;
+          console.log("d.checked", checked);
+        }}
+      />
+    );
+  }
+}
+
 class App extends Component {
   state = {
     redTeamRoster: "",
@@ -77,6 +94,7 @@ class App extends Component {
         <Divider hidden />
         <Header>Roster List</Header>
         {this.renderRosterTable()}
+        <Pez />
       </Container>
     );
   }
