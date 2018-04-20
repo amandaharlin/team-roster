@@ -27,19 +27,25 @@ class App extends Component {
 
   renderRosterTable = () => {
     return (
-      <Table>
+      <Table selectable>
         <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Team R G B</Table.HeaderCell>
+          <Table.Row textAlign="center">
+            <Table.HeaderCell>R</Table.HeaderCell>
+            <Table.HeaderCell>G</Table.HeaderCell>
+            <Table.HeaderCell>B</Table.HeaderCell>
             <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell>Department</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <Table.Cell>
+          <Table.Row textAlign="center">
+            <Table.Cell collapsing>
               <Checkbox checked={true} />
+            </Table.Cell>
+            <Table.Cell collapsing>
               <Checkbox checked={false} />
+            </Table.Cell>
+            <Table.Cell collapsing>
               <Checkbox checked={false} />
             </Table.Cell>
             <Table.Cell>Yolanda </Table.Cell>
