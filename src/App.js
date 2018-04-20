@@ -21,7 +21,9 @@ class Pez extends Component {
     const isActive = true;
     return (
       <Button
-        color="red"
+        icon={" "}
+        color={this.props.color}
+        size="tiny"
         basic={!isActive}
         checked={isActive}
         onClick={(event, data) => {
@@ -57,13 +59,13 @@ class App extends Component {
         <Table.Body>
           <Table.Row textAlign="center">
             <Table.Cell collapsing>
-              <Checkbox checked={true} />
+              <Pez color="red" />
             </Table.Cell>
             <Table.Cell collapsing>
-              <Checkbox checked={false} />
+              <Pez color="green" />
             </Table.Cell>
             <Table.Cell collapsing>
-              <Checkbox checked={false} />
+              <Pez color="blue" />
             </Table.Cell>
             <Table.Cell>Yolanda </Table.Cell>
             <Table.Cell>Sales</Table.Cell>
@@ -94,7 +96,6 @@ class App extends Component {
         <Divider hidden />
         <Header>Roster List</Header>
         {this.renderRosterTable()}
-        <Pez />
       </Container>
     );
   }
