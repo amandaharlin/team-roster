@@ -3,20 +3,17 @@ import "semantic-ui-css/semantic.min.css";
 import React, { Component } from "react";
 import {
   Button,
-  Checkbox,
   Container,
   Divider,
-  Dropdown,
-  Form,
   Header,
   Icon,
-  List,
   Table
 } from "semantic-ui-react";
 
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
 this.state = { mockTeamPlayers };
+
 class Pez extends Component {
   render() {
     const isActive = true;
@@ -49,7 +46,7 @@ class App extends Component {
   renderRosterTable = () => {
     const employeeToRow = mockTeamPlayers.map((employee, i) => {
       return (
-        <Table.Row textAlign="center">
+        <Table.Row textAlign="center" key={employee.username}>
           <Table.Cell collapsing>
             <Pez color="red" />
           </Table.Cell>
@@ -95,52 +92,40 @@ class App extends Component {
             <Table.Row>
               <Table.HeaderCell>Teams</Table.HeaderCell>
               <Table.HeaderCell>Points</Table.HeaderCell>
-
-              <Table.HeaderCell>Progress Bar</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-
           <Table.Body>
+            {" "}
             <Table.Row>
               <Table.Cell>
                 <Header as="h4" image>
-                  <Icon name={"winner"} size="mini" />
-                  <Header.Content>
-                    Red Team<Header.Subheader>Human Resources</Header.Subheader>
-                  </Header.Content>
+                  <Icon name={"user circle outline"} size="mini" />
+                  <Header.Content>team</Header.Content>
                 </Header>
               </Table.Cell>
-              <Table.Cell>22</Table.Cell>
-              <Table.Cell>22</Table.Cell>
+              <Table.Cell> points</Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>
                 <Header as="h4" image>
                   <Icon name={"user circle outline"} size="mini" />
-                  <Header.Content>
-                    Green Team
-                    <Header.Subheader>Fabric Design</Header.Subheader>
-                  </Header.Content>
+                  <Header.Content>team</Header.Content>
                 </Header>
               </Table.Cell>
-              <Table.Cell>15</Table.Cell> <Table.Cell>22</Table.Cell>
+              <Table.Cell> points</Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>
                 <Header as="h4" image>
                   <Icon name={"user circle outline"} size="mini" />
-                  <Header.Content>
-                    Blue Team
-                    <Header.Subheader>Accounting</Header.Subheader>
-                  </Header.Content>
+                  <Header.Content>team</Header.Content>
                 </Header>
               </Table.Cell>
-              <Table.Cell>13</Table.Cell>
-              <Table.Cell>22</Table.Cell>
+              <Table.Cell> points</Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>
-        <div>Make the RosterColorComponent here</div>
+        <div>Make the `RosterColorComponent`` here</div>
       </div>
     );
   };

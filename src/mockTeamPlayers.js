@@ -30,40 +30,6 @@ export const mockTeamPlayers = [
     thumbnail: "portraits/admin-thumb.jpg"
   },
   {
-    username: "jdoe",
-    password: "jdoe",
-    name: {
-      first: "John",
-      last: "Doe"
-    },
-    ssn: "704-23-6085",
-    dob: "1978-10-02T05:00:00.000Z",
-    hiredOn: "2002-04-11T05:00:00.000Z",
-    terminatedOn: null,
-    email: "john.doe@company.com",
-    phones: [
-      {
-        type: "office",
-        number: "456-789-1230"
-      },
-      {
-        type: "cell",
-        number: "654-321-0987"
-      }
-    ],
-    address: {
-      street: "3199 Country Club Rd",
-      city: "Fremont",
-      state: "Virginia",
-      zip: "94390"
-    },
-    roles: ["hourly", "part time", "consultant"],
-    department: "Marketing",
-    gender: "male",
-    portrait: "portraits/jdoe.jpg",
-    thumbnail: "portraits/jdoe-thumb.jpg"
-  },
-  {
     username: "purplewolf498",
     password: "personal",
     name: {
@@ -1015,40 +981,7 @@ export const mockTeamPlayers = [
     portrait: "portraits/bluemeercat66.jpg",
     thumbnail: "portraits/bluemeercat66-thumb.jpg"
   },
-  {
-    username: "ticklishgoose874",
-    password: "hakr",
-    name: {
-      first: "Leon",
-      last: "Gutierrez"
-    },
-    ssn: "391-52-7701",
-    dob: "1965-05-25T05:00:00.000Z",
-    hiredOn: "2007-08-18T05:00:00.000Z",
-    terminatedOn: null,
-    email: "leon.gutierrez45@company.com",
-    phones: [
-      {
-        type: "office",
-        number: "204-199-8167"
-      },
-      {
-        type: "home",
-        number: "302-211-6655"
-      }
-    ],
-    address: {
-      street: "3224 Hunters Creek Dr",
-      city: "Lowell",
-      state: "South Dakota",
-      zip: "90553"
-    },
-    roles: ["salaried", "full time", "consultant"],
-    department: "Marketing",
-    gender: "male",
-    portrait: "portraits/ticklishgoose874.jpg",
-    thumbnail: "portraits/ticklishgoose874-thumb.jpg"
-  },
+
   {
     username: "tinyduck628",
     password: "portland",
@@ -1150,40 +1083,6 @@ export const mockTeamPlayers = [
     gender: "female",
     portrait: "portraits/blackelephant246.jpg",
     thumbnail: "portraits/blackelephant246-thumb.jpg"
-  },
-  {
-    username: "smallostrich593",
-    password: "aberdeen",
-    name: {
-      first: "Evelyn",
-      last: "Wallace"
-    },
-    ssn: "394-47-7510",
-    dob: "1990-01-22T06:00:00.000Z",
-    hiredOn: "2010-12-28T06:00:00.000Z",
-    terminatedOn: null,
-    email: "evelyn.wallace67@company.com",
-    phones: [
-      {
-        type: "office",
-        number: "373-407-2581"
-      },
-      {
-        type: "home",
-        number: "773-308-8212"
-      }
-    ],
-    address: {
-      street: "5285 W 6 Th St",
-      city: "San Jose",
-      state: "Maine",
-      zip: "82809"
-    },
-    roles: ["salaried", "full time", "employee"],
-    department: "Marketing",
-    gender: "female",
-    portrait: "portraits/smallostrich593.jpg",
-    thumbnail: "portraits/smallostrich593-thumb.jpg"
   },
   {
     username: "ticklishbutterfly1",
