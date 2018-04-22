@@ -1,22 +1,49 @@
 import "semantic-ui-css/semantic.min.css";
 
+import "./App.css";
+
 import React, { Component } from "react";
 import {
   Button,
   Container,
   Divider,
+  Grid,
   Header,
   Icon,
+  Progress,
   Table
 } from "semantic-ui-react";
 
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
+/*
+add progress bars for team points
+
+add color shade visualizer ~ RGB background color on a div
+
+add a scaling function that can take something to something and scale it to something, 0-100 to 0-255. call it with some number at the end. 
+^ a linear scale will be needed in a few places in this app
+
+
+
+  /* make the view a reflection of the model*/
+
+/*color square - template a string. 
+    
+
+    -- fix the pez's. make them correct.
+   √ get the other UI lemented.
+    get the scale func and drive those ui elements.
+
+    and tomorrow put click handlers on the pez;s
+    */
+
 this.state = { mockTeamPlayers };
 
 class Pez extends Component {
   render() {
-    const isActive = true;
+    const isActive = false; //isSelected?
+
     return (
       <Button
         key={this.props.color}
@@ -41,7 +68,7 @@ class App extends Component {
     greenTeam: [
       ...mockTeamPlayers.slice(0, 5),
       ...mockTeamPlayers.slice(10, 15)
-    ], //set this with slice
+    ],
     greenTeamPercent: 90,
     blueTeam: [...mockTeamPlayers.slice(7, 12)],
     blueTeamPercent: 20,
@@ -92,46 +119,66 @@ class App extends Component {
   renderRosterSum = () => {
     return (
       <div>
-        <Header>Team Roster</Header>
-        <Table basic="very" celled collapsing>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Teams</Table.HeaderCell>
-              <Table.HeaderCell>Points</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {" "}
-            <Table.Row>
-              <Table.Cell>
-                <Header as="h4" image>
-                  <Icon name={"user circle outline"} size="mini" />
-                  <Header.Content>team</Header.Content>
-                </Header>
-              </Table.Cell>
-              <Table.Cell> points</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <Header as="h4" image>
-                  <Icon name={"user circle outline"} size="mini" />
-                  <Header.Content>team</Header.Content>
-                </Header>
-              </Table.Cell>
-              <Table.Cell> points</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <Header as="h4" image>
-                  <Icon name={"user circle outline"} size="mini" />
-                  <Header.Content>team</Header.Content>
-                </Header>
-              </Table.Cell>
-              <Table.Cell> points</Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-        <div>Make the `RosterColorComponent`` here</div>
+        <Grid columns={2} padded>
+          <Grid.Column>
+            <Header>Team Roster</Header>
+            <Table basic="very" celled collapsing>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Teams</Table.HeaderCell>
+                  <Table.HeaderCell>Points</Table.HeaderCell>
+                  <Table.HeaderCell>Progress Bar</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>
+                    <Header as="h4" image>
+                      <Icon name={"user circle outline"} size="mini" />
+                      <Header.Content>red team</Header.Content>
+                    </Header>
+                  </Table.Cell>
+                  <Table.Cell> 32</Table.Cell>
+                  <Table.Cell>
+                    <Progress percent={32} color="red" />
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>
+                    <Header as="h4" image>
+                      <Icon name={"user circle outline"} size="mini" />
+                      <Header.Content>green team</Header.Content>
+                    </Header>
+                  </Table.Cell>
+                  <Table.Cell> 59</Table.Cell>
+                  <Table.Cell>
+                    {" "}
+                    <Progress percent={59} color="green" />
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>
+                    <Header as="h4" image>
+                      <Icon name={"user circle outline"} size="mini" />
+                      <Header.Content>blue team</Header.Content>
+                    </Header>
+                  </Table.Cell>
+                  <Table.Cell> 5</Table.Cell>
+                  <Table.Cell>
+                    {" "}
+                    <Progress percent={5} color="blue" />
+                  </Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            </Table>
+          </Grid.Column>
+
+          <Grid.Column>
+            <div>Make the Color Component here</div>
+            <div className={`colorVizSquare`} />
+          </Grid.Column>
+        </Grid>
       </div>
     );
   };
