@@ -36,15 +36,21 @@ class Pez extends Component {
 
 class App extends Component {
   state = {
-    redTeamRoster: "",
-    greenTeamRoster: "",
-    blueTeamRoster: "",
-    winningTeamColor: "",
-    mockTeam: []
+    redTeam: [],
+    redTeamPercent: 0,
+    greenTeam: [
+      ...mockTeamPlayers.slice(0, 5),
+      ...mockTeamPlayers.slice(10, 15)
+    ], //set this with slice
+    greenTeamPercent: 90,
+    blueTeam: [...mockTeamPlayers.slice(7, 12)],
+    blueTeamPercent: 20,
+    allTeamsColor: "rgba(34,128,50,1)",
+    allTeam: mockTeamPlayers
   };
 
   renderRosterTable = () => {
-    const employeeToRow = mockTeamPlayers.map((employee, i) => {
+    const employeeToRow = this.state.allTeam.map((employee, i) => {
       return (
         <Table.Row textAlign="center" key={employee.username}>
           <Table.Cell collapsing>
