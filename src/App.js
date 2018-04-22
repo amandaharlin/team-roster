@@ -16,36 +16,13 @@ import {
 
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
-/*
-add progress bars for team points
-
-add color shade visualizer ~ RGB background color on a div
-
-add a scaling function that can take something to something and scale it to something, 0-100 to 0-255. call it with some number at the end. 
-^ a linear scale will be needed in a few places in this app
-
-
-
-  /* make the view a reflection of the model*/
-
-/*color square - template a string. 
-    
-
-    -- fix the pez's. make them correct.
-   √ get the other UI lemented.
-    get the scale func and drive those ui elements.
-
-    and tomorrow put click handlers on the pez;s
-    */
-
 this.state = { mockTeamPlayers };
 
 class Pez extends Component {
   render() {
     const isActive = false; //isSelected?
-
     return (
-      <Button
+      <Button //pez
         key={this.props.color}
         icon
         color={this.props.color}
@@ -54,7 +31,9 @@ class Pez extends Component {
         checked={isActive}
         onClick={(event, data) => {
           const { checked } = data;
-          console.log("d.checked", checked, "color", this.props.color);
+          console.log('data',data);
+         this.setState({basic: isActive, checked: !isActive});
+         console.log('state', this.state)
         }}
       />
     );
