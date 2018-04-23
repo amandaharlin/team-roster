@@ -13,6 +13,7 @@ import {
   Progress,
   Table
 } from "semantic-ui-react";
+import { linearScale } from "simple-linear-scale";
 
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
@@ -20,7 +21,13 @@ this.state = { mockTeamPlayers };
 
 class Pez extends Component {
   render() {
-    const isActive = false; //isSelected?
+    const isActive = false;
+    //Selected In Model?
+
+    function iExistInTeamList(person, team) {
+      return;
+    }
+
     return (
       <Button //pez
         key={this.props.color}
@@ -31,11 +38,37 @@ class Pez extends Component {
         checked={isActive}
         onClick={(event, data) => {
           const { checked } = data;
-          console.log('data',data);
-         this.setState({basic: isActive, checked: !isActive});
-         console.log('state', this.state)
+
+          const newTeamList = iExistInTeamList
+            ? console.log(`they're on this team, take em out`)
+            : console.log(`add them to this team`);
+          //this.setState({oldTeam: newTeam});
         }}
       />
+    );
+  }
+}
+
+class ColorViz extends Component {
+  render() {
+    // const { redTeam, greenTeam, blueTeam, allTeam, allTeamsColors } = this.props;
+    // var linearScaleToColor = linearScale([0, allTeam.length], [0, 255], true);
+    // let redTeamColor = linearScaleToColor(redTeam.length);
+    // let greenTeamColor = linearScaleToColor(greenTeam.length);
+    // let blueTeamColor = linearScaleToColor(blueTeam.length);
+
+    var colorVizStyle = {
+      width: "200px",
+      height: "200px",
+      backgroundColor: `rgba(34, 128, 50,1)`
+      //backgroundColor: `rgba(${redTeamColor}, ${greenTeamColor}, ${blueTeamColor}, 1)`
+    };
+
+    return (
+      <div>
+        Make the Color Component here
+        <div style={colorVizStyle} />
+      </div>
     );
   }
 }
@@ -154,8 +187,7 @@ class App extends Component {
           </Grid.Column>
 
           <Grid.Column>
-            <div>Make the Color Component here</div>
-            <div className={`colorVizSquare`} />
+            <ColorViz />
           </Grid.Column>
         </Grid>
       </div>
