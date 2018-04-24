@@ -17,16 +17,13 @@ import { linearScale } from "simple-linear-scale";
 
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
-this.state = { mockTeamPlayers };
+this.state = {
+  mockTeamPlayers
+};
 
 class Pez extends Component {
   render() {
-    const isActive = false;
-    //Selected In Model?
-
-    function iExistInTeamList(person, team) {
-      return;
-    }
+    const { isActive } = this.props;
 
     return (
       <Button //pez
@@ -38,11 +35,20 @@ class Pez extends Component {
         checked={isActive}
         onClick={(event, data) => {
           const { checked } = data;
+          const clickedOnTeam = `${this.props.color}Team`; //remember empty values
+          console.log("data", data);
+          console.log("clickedOnTeam", clickedOnTeam);
+          const newData = checked
+            ? console.log(
+                `checked *was* true. they're on this team, so take em out`,
+                this.props.color
+              )
+            : console.log(
+                `checked *was* false. add them to this team`,
+                this.props.color
+              );
 
-          const newTeamList = iExistInTeamList
-            ? console.log(`they're on this team, take em out`)
-            : console.log(`add them to this team`);
-          //this.setState({oldTeam: newTeam});
+          this.setState({ clickedOnTeam: newData });
         }}
       />
     );
@@ -51,7 +57,14 @@ class Pez extends Component {
 
 class ColorViz extends Component {
   render() {
-    // const { redTeam, greenTeam, blueTeam, allTeam, allTeamsColors } = this.props;
+    const {
+      redTeam,
+      greenTeam,
+      blueTeam,
+      allTeam,
+      allTeamsColors
+    } = this.props;
+
     // var linearScaleToColor = linearScale([0, allTeam.length], [0, 255], true);
     // let redTeamColor = linearScaleToColor(redTeam.length);
     // let greenTeamColor = linearScaleToColor(greenTeam.length);
@@ -66,8 +79,7 @@ class ColorViz extends Component {
 
     return (
       <div>
-        Make the Color Component here
-        <div style={colorVizStyle} />
+        Make the Color Component here <div style={colorVizStyle} />
       </div>
     );
   }
@@ -88,18 +100,35 @@ class App extends Component {
     allTeam: mockTeamPlayers
   };
 
+  iExistInList = (listItem, list) => {
+    return (
+      list.filter((li, i) => {
+        if (li.ssn === listItem.ssn) {
+          return true;
+        }
+      }).length > 0
+    );
+  };
+
   renderRosterTable = () => {
+    const { redTeam, greenTeam, blueTeam } = this.state;
     const employeeToRow = this.state.allTeam.map((employee, i) => {
       return (
         <Table.Row textAlign="center" key={employee.username}>
           <Table.Cell collapsing>
-            <Pez color="red" />
+            <Pez color="red" isActive={this.iExistInList(employee, redTeam)} />
           </Table.Cell>
           <Table.Cell collapsing>
-            <Pez color="green" />
+            <Pez
+              color="green"
+              isActive={this.iExistInList(employee, greenTeam)}
+            />
           </Table.Cell>
           <Table.Cell collapsing>
-            <Pez color="blue" />
+            <Pez
+              color="blue"
+              isActive={this.iExistInList(employee, blueTeam)}
+            />
           </Table.Cell>
           <Table.Cell>
             {employee.name.first} {employee.name.last}
@@ -129,20 +158,19 @@ class App extends Component {
   };
 
   renderRosterSum = () => {
+    const { redTeamPercent, greenTeamPercent, blueTeamPercent } = this.state;
     return (
       <div>
         <Grid columns={2} padded>
           <Grid.Column>
-            <Header>Team Roster</Header>
-            <Table basic="very" celled collapsing>
+            <Header>Team Roster </Header>
+            <Table basic="very" celled>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Teams</Table.HeaderCell>
-                  <Table.HeaderCell>Points</Table.HeaderCell>
                   <Table.HeaderCell>Progress Bar</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
-
               <Table.Body>
                 <Table.Row>
                   <Table.Cell>
@@ -151,9 +179,8 @@ class App extends Component {
                       <Header.Content>red team</Header.Content>
                     </Header>
                   </Table.Cell>
-                  <Table.Cell> 32</Table.Cell>
                   <Table.Cell>
-                    <Progress percent={32} color="red" />
+                    <Progress percent={redTeamPercent} color="red" />
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -163,10 +190,8 @@ class App extends Component {
                       <Header.Content>green team</Header.Content>
                     </Header>
                   </Table.Cell>
-                  <Table.Cell> 59</Table.Cell>
                   <Table.Cell>
-                    {" "}
-                    <Progress percent={59} color="green" />
+                    <Progress percent={greenTeamPercent} color="green" />
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -176,16 +201,13 @@ class App extends Component {
                       <Header.Content>blue team</Header.Content>
                     </Header>
                   </Table.Cell>
-                  <Table.Cell> 5</Table.Cell>
                   <Table.Cell>
-                    {" "}
-                    <Progress percent={5} color="blue" />
+                    <Progress percent={blueTeamPercent} color="blue" />
                   </Table.Cell>
                 </Table.Row>
               </Table.Body>
             </Table>
           </Grid.Column>
-
           <Grid.Column>
             <ColorViz />
           </Grid.Column>
@@ -199,9 +221,7 @@ class App extends Component {
       <Container className="App">
         <Divider hidden />
         {this.renderRosterSum()}
-
         <Divider />
-
         {this.renderRosterTable()}
       </Container>
     );
