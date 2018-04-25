@@ -23,30 +23,23 @@ this.state = {
 
 class Pez extends Component {
   render() {
-    const { isActive } = this.props;
+    const { isActive, color, person } = this.props;
 
     return (
-      <Button //pez
-        key={this.props.color}
+      <Button
+        key={Math.random()} //fix this
         icon
-        color={this.props.color}
+        color={color}
         size="big"
         basic={!isActive}
         checked={isActive}
         onClick={(event, data) => {
           const { checked } = data;
-          const clickedOnTeam = `${this.props.color}Team`; //remember empty values
-          console.log("data", data);
-          console.log("clickedOnTeam", clickedOnTeam);
-          const newData = checked
-            ? console.log(
-                `checked *was* true. they're on this team, so take em out`,
-                this.props.color
-              )
-            : console.log(
-                `checked *was* false. add them to this team`,
-                this.props.color
-              );
+          const clickedOnTeam = `${color}Team`; //remember empty values
+          const newData = isActive
+            ? console.log(`remove from`, color, person)
+            : this.setState({ ...clickedOnTeam, person });
+          console.log(`add to`, color, person);
 
           this.setState({ clickedOnTeam: newData });
         }}
@@ -85,6 +78,10 @@ class ColorViz extends Component {
   }
 }
 
+//0-totalTeamLength to 0-100, and the color component 0-255.
+//run scale fun each time
+//componentWillUpdate could be used
+
 class App extends Component {
   state = {
     redTeam: [],
@@ -113,20 +110,28 @@ class App extends Component {
   renderRosterTable = () => {
     const { redTeam, greenTeam, blueTeam } = this.state;
     const employeeToRow = this.state.allTeam.map((employee, i) => {
+      console.log("employee", employee, "i", i);
+      console.log("blueTeam", blueTeam);
       return (
         <Table.Row textAlign="center" key={employee.username}>
           <Table.Cell collapsing>
-            <Pez color="red" isActive={this.iExistInList(employee, redTeam)} />
+            <Pez
+              color="red"
+              person={employee}
+              isActive={this.iExistInList(employee, redTeam)}
+            />
           </Table.Cell>
           <Table.Cell collapsing>
             <Pez
               color="green"
+              person={employee}
               isActive={this.iExistInList(employee, greenTeam)}
             />
           </Table.Cell>
           <Table.Cell collapsing>
             <Pez
               color="blue"
+              person={employee}
               isActive={this.iExistInList(employee, blueTeam)}
             />
           </Table.Cell>
