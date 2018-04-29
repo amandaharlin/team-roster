@@ -13,7 +13,7 @@ import {
   Progress,
   Table
 } from "semantic-ui-react";
-import { linearScale } from "simple-linear-scale";
+import linearScale from "simple-linear-scale";
 
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
@@ -80,16 +80,14 @@ componentWillUpdate could be used
 */
 
 class App extends Component {
+  //make progress bar work
   state = {
     redTeam: [],
-    redTeamPercent: 0,
     greenTeam: [
       ...mockTeamPlayers.slice(0, 5),
       ...mockTeamPlayers.slice(10, 15)
     ],
-    greenTeamPercent: 90,
     blueTeam: [...mockTeamPlayers.slice(7, 12)],
-    blueTeamPercent: 20,
     allTeamsColor: "rgba(34,128,50,1)",
     allTeam: mockTeamPlayers
   };
@@ -183,8 +181,25 @@ class App extends Component {
     );
   };
 
+  getTeamPercent = (sublist, masterlist) => {
+    var teamLengthToLinearScale = linearScale([0, masterlist.length], [0, 100]);
+
+    return teamLengthToLinearScale(sublist.length);
+  };
+
   renderRosterSum = () => {
-    const { redTeamPercent, greenTeamPercent, blueTeamPercent } = this.state;
+    const {
+      allTeam,
+      redTeam,
+      redTeamPercent,
+      greenTeamPercent,
+      blueTeamPercent
+    } = this.state;
+
+    let redPercent = this.getTeamPercent(redTeam, allTeam);
+
+    console.log("red%", redPercent);
+
     return (
       <div>
         <Grid columns={2} padded>
@@ -206,7 +221,10 @@ class App extends Component {
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
-                    <Progress percent={redTeamPercent} color="red" />
+                    <Progress
+                      percent={this.getTeamPercent(redTeam, allTeam)}
+                      color="red"
+                    />
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -217,7 +235,7 @@ class App extends Component {
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
-                    <Progress percent={greenTeamPercent} color="green" />
+                    <Progress percent={50} color="green" />
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -228,7 +246,7 @@ class App extends Component {
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
-                    <Progress percent={blueTeamPercent} color="blue" />
+                    <Progress percent={20} color="blue" />
                   </Table.Cell>
                 </Table.Row>
               </Table.Body>
