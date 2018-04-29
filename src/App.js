@@ -188,15 +188,11 @@ class App extends Component {
   };
 
   renderRosterSum = () => {
-    const {
-      allTeam,
-      redTeam,
-      redTeamPercent,
-      greenTeamPercent,
-      blueTeamPercent
-    } = this.state;
+    const { allTeam, redTeam, greenTeam, blueTeam } = this.state;
 
-    let redPercent = this.getTeamPercent(redTeam, allTeam);
+    const redPercent = this.getTeamPercent(redTeam, allTeam);
+    const greenPercent = this.getTeamPercent(greenTeam, allTeam);
+    const bluePercent = this.getTeamPercent(blueTeam, allTeam);
 
     console.log("red%", redPercent);
 
@@ -235,7 +231,10 @@ class App extends Component {
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
-                    <Progress percent={50} color="green" />
+                    <Progress
+                      percent={this.getTeamPercent(greenTeam, allTeam)}
+                      color="green"
+                    />
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -246,7 +245,10 @@ class App extends Component {
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
-                    <Progress percent={20} color="blue" />
+                    <Progress
+                      percent={this.getTeamPercent(blueTeam, allTeam)}
+                      color="blue"
+                    />
                   </Table.Cell>
                 </Table.Row>
               </Table.Body>
