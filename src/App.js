@@ -23,25 +23,20 @@ this.state = {
 
 class Pez extends Component {
   render() {
-    const { isActive, color, person } = this.props;
+    const { isActive, color, onClick } = this.props;
 
     return (
       <Button
-        key={Math.random()} //fix this
+        key={Math.random()}
         icon
         color={color}
         size="big"
         basic={!isActive}
         checked={isActive}
-        onClick={(event, data) => {
-          const { checked } = data;
-          const clickedOnTeam = `${color}Team`; //remember empty values
-          const newData = isActive
-            ? console.log(`remove from`, color, person)
-            : this.setState({ ...clickedOnTeam, person });
-          console.log(`add to`, color, person);
-
-          this.setState({ clickedOnTeam: newData });
+        onClick={(e, data) => {
+          if (typeof onClick === "function") {
+            onClick(e, data);
+          }
         }}
       />
     );
@@ -78,9 +73,11 @@ class ColorViz extends Component {
   }
 }
 
-//0-totalTeamLength to 0-100, and the color component 0-255.
-//run scale fun each time
-//componentWillUpdate could be used
+/*
+0-totalTeamLength to 0-100, and the color component 0-255.
+run scale fun each time
+componentWillUpdate could be used
+*/
 
 class App extends Component {
   state = {
@@ -107,31 +104,52 @@ class App extends Component {
     );
   };
 
+  //updateTeam = (teamMember, team) => {
+  //const { isActive } =
+  // const newData = isActive
+  //   ? team.filter((tm, i) => {
+  //       return tm.ssn != teamMember.ssn;
+  //     })
+  //   : [...team, teamMember];
+  // this.setState({ team: newData });
+  //};
+
   renderRosterTable = () => {
     const { redTeam, greenTeam, blueTeam } = this.state;
+
     const employeeToRow = this.state.allTeam.map((employee, i) => {
-      console.log("employee", employee, "i", i);
-      console.log("blueTeam", blueTeam);
+      let active = this.iExistInList(employee, redTeam);
       return (
         <Table.Row textAlign="center" key={employee.username}>
           <Table.Cell collapsing>
             <Pez
               color="red"
-              person={employee}
-              isActive={this.iExistInList(employee, redTeam)}
+              isActive={active}
+              onClick={(e, data) => {
+                const newData = active
+                  ? redTeam.filter((teamMember, i) => {
+                      return teamMember.ssn !== employee.ssn;
+                    })
+                  : [...redTeam, employee];
+
+                this.setState({ redTeam: newData });
+
+                console.log("data", data);
+              }}
             />
           </Table.Cell>
           <Table.Cell collapsing>
             <Pez
               color="green"
-              person={employee}
               isActive={this.iExistInList(employee, greenTeam)}
+              onClick={(e, data) => {
+                //this.updateTeam(employee, greenTeam);
+              }}
             />
           </Table.Cell>
           <Table.Cell collapsing>
             <Pez
               color="blue"
-              person={employee}
               isActive={this.iExistInList(employee, blueTeam)}
             />
           </Table.Cell>
