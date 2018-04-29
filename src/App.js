@@ -163,14 +163,9 @@ class App extends Component {
     let greenTeamColor = scaleTeamLengthToColor(greenTeam.length);
     let blueTeamColor = scaleTeamLengthToColor(blueTeam.length);
 
-    console.log("red", redTeamColor);
-    console.log("green", greenTeamColor);
-    console.log("blue", blueTeamColor);
-
     var colorVizStyle = {
       width: "200px",
       height: "200px",
-      //backgroundColor: "rgba(255,128,50,1)"
       backgroundColor: `rgba(${redTeamColor}, ${greenTeamColor}, ${blueTeamColor}, 1)`
     };
 
@@ -200,43 +195,46 @@ class App extends Component {
                 <Table.Row>
                   <Table.Cell>
                     <Header as="h4" image>
-                      <Icon name={"user circle outline"} size="mini" />
+                      <Icon
+                        name={"user circle outline"}
+                        color="red"
+                        size="mini"
+                      />
                       <Header.Content>red team</Header.Content>
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
-                    <Progress
-                      percent={this.getTeamPercent(redTeam, allTeam)}
-                      color="red"
-                    />
+                    <Progress percent={redPercent} color="red" />
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>
                     <Header as="h4" image>
-                      <Icon name={"user circle outline"} size="mini" />
+                      <Icon
+                        name={"user circle outline"}
+                        color="green"
+                        size="mini"
+                      />
                       <Header.Content>green team</Header.Content>
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
-                    <Progress
-                      percent={this.getTeamPercent(greenTeam, allTeam)}
-                      color="green"
-                    />
+                    <Progress percent={greenPercent} color="green" />
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell>
                     <Header as="h4" image>
-                      <Icon name={"user circle outline"} size="mini" />
+                      <Icon
+                        name={"user circle outline"}
+                        color="blue"
+                        size="mini"
+                      />
                       <Header.Content>blue team</Header.Content>
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
-                    <Progress
-                      percent={this.getTeamPercent(blueTeam, allTeam)}
-                      color="blue"
-                    />
+                    <Progress percent={bluePercent} color="blue" />
                   </Table.Cell>
                 </Table.Row>
               </Table.Body>
