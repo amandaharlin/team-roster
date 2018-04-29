@@ -43,36 +43,6 @@ class Pez extends Component {
   }
 }
 
-class ColorViz extends Component {
-  render() {
-    const {
-      redTeam,
-      greenTeam,
-      blueTeam,
-      allTeam,
-      allTeamsColors
-    } = this.props;
-
-    // var linearScaleToColor = linearScale([0, allTeam.length], [0, 255], true);
-    // let redTeamColor = linearScaleToColor(redTeam.length);
-    // let greenTeamColor = linearScaleToColor(greenTeam.length);
-    // let blueTeamColor = linearScaleToColor(blueTeam.length);
-
-    var colorVizStyle = {
-      width: "200px",
-      height: "200px",
-      backgroundColor: `rgba(34, 128, 50,1)`
-      //backgroundColor: `rgba(${redTeamColor}, ${greenTeamColor}, ${blueTeamColor}, 1)`
-    };
-
-    return (
-      <div>
-        Make the Color Component here <div style={colorVizStyle} />
-      </div>
-    );
-  }
-}
-
 /*
 0-totalTeamLength to 0-100, and the color component 0-255.
 run scale fun each time
@@ -80,7 +50,6 @@ componentWillUpdate could be used
 */
 
 class App extends Component {
-  //make progress bar work
   state = {
     redTeam: [],
     greenTeam: [
@@ -88,7 +57,6 @@ class App extends Component {
       ...mockTeamPlayers.slice(10, 15)
     ],
     blueTeam: [...mockTeamPlayers.slice(7, 12)],
-    allTeamsColor: "rgba(34,128,50,1)",
     allTeam: mockTeamPlayers
   };
 
@@ -187,14 +155,34 @@ class App extends Component {
     return teamLengthToLinearScale(sublist.length);
   };
 
+  renderColorViz = () => {
+    const { redTeam, greenTeam, blueTeam, allTeam } = this.state;
+
+    var scaleTeamLengthToColor = linearScale([0, allTeam.length], [0, 255]);
+    let redTeamColor = scaleTeamLengthToColor(redTeam.length);
+    let greenTeamColor = scaleTeamLengthToColor(greenTeam.length);
+    let blueTeamColor = scaleTeamLengthToColor(blueTeam.length);
+
+    console.log("red", redTeamColor);
+    console.log("green", greenTeamColor);
+    console.log("blue", blueTeamColor);
+
+    var colorVizStyle = {
+      width: "200px",
+      height: "200px",
+      //backgroundColor: "rgba(255,128,50,1)"
+      backgroundColor: `rgba(${redTeamColor}, ${greenTeamColor}, ${blueTeamColor}, 1)`
+    };
+
+    return <div style={colorVizStyle}>hi</div>;
+  };
+
   renderRosterSum = () => {
     const { allTeam, redTeam, greenTeam, blueTeam } = this.state;
 
     const redPercent = this.getTeamPercent(redTeam, allTeam);
     const greenPercent = this.getTeamPercent(greenTeam, allTeam);
     const bluePercent = this.getTeamPercent(blueTeam, allTeam);
-
-    console.log("red%", redPercent);
 
     return (
       <div>
@@ -254,9 +242,7 @@ class App extends Component {
               </Table.Body>
             </Table>
           </Grid.Column>
-          <Grid.Column>
-            <ColorViz />
-          </Grid.Column>
+          <Grid.Column>{this.renderColorViz()}</Grid.Column>
         </Grid>
       </div>
     );
