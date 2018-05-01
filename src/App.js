@@ -43,12 +43,6 @@ class Pez extends Component {
   }
 }
 
-/*
-0-totalTeamLength to 0-100, and the color component 0-255.
-run scale fun each time
-componentWillUpdate could be used
-*/
-
 class App extends Component {
   state = {
     redTeam: [],
@@ -80,6 +74,12 @@ class App extends Component {
     return newData;
   };
 
+  removeEmployeeFromTeam = (employee, team) => {
+    return team.filter((teamMember, i) => {
+      return teamMember.ssn !== employee.ssn;
+    });
+  };
+
   renderRosterTable = () => {
     const { redTeam, greenTeam, blueTeam } = this.state;
 
@@ -87,6 +87,7 @@ class App extends Component {
       let activeRed = this.iExistInList(employee, redTeam);
       let activeGreen = this.iExistInList(employee, greenTeam);
       let activeBlue = this.iExistInList(employee, blueTeam);
+
       return (
         <Table.Row textAlign="center" key={employee.username}>
           <Table.Cell collapsing>
@@ -95,7 +96,9 @@ class App extends Component {
               isActive={activeRed}
               onClick={(e, data) => {
                 this.setState({
-                  redTeam: this.toggleEmployeeInTeam(employee, redTeam)
+                  redTeam: this.toggleEmployeeInTeam(employee, redTeam),
+                  greenTeam: this.removeEmployeeFromTeam(employee, greenTeam),
+                  blueTeam: this.removeEmployeeFromTeam(employee, blueTeam)
                 });
               }}
             />
@@ -106,7 +109,9 @@ class App extends Component {
               isActive={activeGreen}
               onClick={(e, data) => {
                 this.setState({
-                  greenTeam: this.toggleEmployeeInTeam(employee, greenTeam)
+                  greenTeam: this.toggleEmployeeInTeam(employee, greenTeam),
+                  redTeam: this.removeEmployeeFromTeam(employee, redTeam),
+                  blueTeam: this.removeEmployeeFromTeam(employee, blueTeam)
                 });
               }}
             />
@@ -117,7 +122,9 @@ class App extends Component {
               isActive={activeBlue}
               onClick={(e, data) => {
                 this.setState({
-                  blueTeam: this.toggleEmployeeInTeam(employee, blueTeam)
+                  blueTeam: this.toggleEmployeeInTeam(employee, blueTeam),
+                  redTeam: this.removeEmployeeFromTeam(employee, redTeam),
+                  greenTeam: this.removeEmployeeFromTeam(employee, greenTeam)
                 });
               }}
             />
