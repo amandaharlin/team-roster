@@ -16,33 +16,12 @@ import {
 } from "semantic-ui-react";
 import linearScale from "simple-linear-scale";
 
+import { Pez } from "./components/pez";
 import { mockTeamPlayers } from "./mockTeamPlayers";
 
 this.state = {
   mockTeamPlayers
 };
-
-class Pez extends Component {
-  render() {
-    const { isActive, color, onClick } = this.props;
-
-    return (
-      <Button
-        key={Math.random()}
-        icon
-        color={color}
-        size="big"
-        basic={!isActive}
-        checked={isActive}
-        onClick={(e, data) => {
-          if (typeof onClick === "function") {
-            onClick(e, data);
-          }
-        }}
-      />
-    );
-  }
-}
 
 class App extends Component {
   state = {
