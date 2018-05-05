@@ -11,6 +11,7 @@ import {
   Header,
   Icon,
   Progress,
+  Segment,
   Table
 } from "semantic-ui-react";
 import linearScale from "simple-linear-scale";
@@ -50,7 +51,7 @@ class App extends Component {
       ...mockTeamPlayers.slice(0, 5),
       ...mockTeamPlayers.slice(10, 15)
     ],
-    blueTeam: [...mockTeamPlayers.slice(7, 12)],
+    blueTeam: [...mockTeamPlayers.slice(18, 23)],
     allTeam: mockTeamPlayers
   };
 
@@ -189,7 +190,48 @@ class App extends Component {
   };
 
   renderWalkthrough = () => {
-    return <div>explaination of project here</div>;
+    return (
+      <Segment>
+        <Header as="h5">What is this project about?</Header>
+        <div>
+          The Team Roster project was made to demonstrate comphrehension in a
+          few areas: React, ES6, React Semantic UI, native Map and Filter
+          functions, and state management without using Redux.
+        </div>
+        <Header as="h5">How do I interact with this project?</Header>
+        <div>
+          <p>
+            This project has a mock list of people. You can add the people to
+            any of 3 teams: the Red Team, the Green Team, or the Blue Team. The
+            amount of people on a team is visualized with Progress Bars and a
+            Circular-Shaped Div.
+          </p>
+          <p>
+            The Team Roster section shows what percentage of people are on a
+            team with Progress Bars. The percentages are transformed with a
+            linear scale function into RGBA, which colors the circular shaped
+            div.
+            <i>
+              (For example: the more people that are added to the Red team, the
+              more progress appears on the red Progress Bar and the redder the
+              circle becomes.)
+            </i>
+          </p>
+          <p>
+            The Roster List section shows that everyone can be added to a team.
+            Click on or off the Red, Green, and Blue buttons next to their names
+            in order to add that person to a specific team. People can join 1
+            team at a time.
+            <i>
+              (For example: try adding `Adam Ministrator` to the Blue Team.
+              Check out how they're no longer be on the Green Team, that the
+              Green Button will becomes inactive, how the Blue Progress Bar
+              grows, and how the Circular Div becomes slightly Bluer.)
+            </i>
+          </p>
+        </div>
+      </Segment>
+    );
   };
 
   renderRosterSum = () => {
@@ -273,6 +315,8 @@ class App extends Component {
       <Container className="App">
         <Divider hidden />
         {this.renderWalkthrough()}
+        <Divider hidden />
+        <Divider hidden />
         <Divider hidden />
         {this.renderRosterSum()}
         <Divider horizontal>Select your Team Players</Divider>
