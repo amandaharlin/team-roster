@@ -139,6 +139,7 @@ class App extends Component {
 
     return (
       <div>
+        <Divider hidden />
         <Header>Roster List</Header>
         <Table selectable>
           <Table.Header>
@@ -173,10 +174,22 @@ class App extends Component {
     var colorVizStyle = {
       width: "200px",
       height: "200px",
+      borderRadius: "50%",
+      marginTop: "10%",
+      marginBottom: "25%",
       backgroundColor: `rgba(${redTeamColor}, ${greenTeamColor}, ${blueTeamColor}, 1)`
     };
 
-    return <div style={colorVizStyle}>hi</div>;
+    return (
+      <div>
+        <Header as="h4">Team Percentages as RGBA</Header>
+        <div style={colorVizStyle} />
+      </div>
+    );
+  };
+
+  renderWalkthrough = () => {
+    return <div>explaination of project here</div>;
   };
 
   renderRosterSum = () => {
@@ -189,13 +202,15 @@ class App extends Component {
     return (
       <div>
         <Grid columns={2} padded>
-          <Grid.Column>
+          <Grid.Column width="12">
             <Header>Team Roster </Header>
             <Table basic="very" celled>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Teams</Table.HeaderCell>
-                  <Table.HeaderCell>Progress Bar</Table.HeaderCell>
+                  <Table.HeaderCell width={3}>Teams</Table.HeaderCell>
+                  <Table.HeaderCell width={13}>
+                    Percentage of People on a Team
+                  </Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -247,7 +262,7 @@ class App extends Component {
               </Table.Body>
             </Table>
           </Grid.Column>
-          <Grid.Column>{this.renderColorViz()}</Grid.Column>
+          <Grid.Column width="4">{this.renderColorViz()}</Grid.Column>
         </Grid>
       </div>
     );
@@ -257,8 +272,10 @@ class App extends Component {
     return (
       <Container className="App">
         <Divider hidden />
+        {this.renderWalkthrough()}
+        <Divider hidden />
         {this.renderRosterSum()}
-        <Divider />
+        <Divider horizontal>Select your Team Players</Divider>
         {this.renderRosterTable()}
       </Container>
     );
