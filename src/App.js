@@ -293,9 +293,10 @@ class App extends Component {
     return (
       <Container className="App">
         <Divider hidden />
+        <Header as="h1">The Team Roster Project</Header>
         {this.renderWalkthrough()}
         <Divider hidden />
-        <Divider hidden />
+        <Divider section />
         <Divider hidden />
         {this.renderRosterSum()}
         <Divider horizontal>Select your Team Players</Divider>
