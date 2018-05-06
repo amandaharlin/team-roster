@@ -131,7 +131,31 @@ class App extends Component {
               <Table.HeaderCell>Department</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>{employeeToRow}</Table.Body>
+          <Table.Body>
+            {/* <Table.Row>
+              <Table.Cell collapsing>
+                <Pez
+                  label={{ content: "select all" }}
+                  labelPosition="right"
+                  color="red"
+                  //isActive={activeRed}
+                  onClick={(e, data) => {
+                    this.setState({
+                      //toggle every person into red
+                      //remove every person from green & blue teams
+                    });
+                  }}
+                />
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <Pez />
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <Pez />
+              </Table.Cell>
+            </Table.Row> */}
+            {employeeToRow}
+          </Table.Body>
         </Table>
       </div>
     );
@@ -140,7 +164,7 @@ class App extends Component {
   getTeamPercent = (sublist, masterlist) => {
     var teamLengthToLinearScale = linearScale([0, masterlist.length], [0, 100]);
 
-    return teamLengthToLinearScale(sublist.length);
+    return Math.round(teamLengthToLinearScale(sublist.length));
   };
 
   renderColorViz = () => {
@@ -236,14 +260,14 @@ class App extends Component {
               </Table.Header>
               <Table.Body>
                 <Table.Row>
-                  <Table.Cell>
+                  <Table.Cell singleLine>
                     <Header as="h4" image>
                       <Icon
                         name={"user circle outline"}
                         color="red"
                         size="mini"
                       />
-                      <Header.Content>red team</Header.Content>
+                      <Header.Content>red team • {redPercent}%</Header.Content>
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
@@ -251,14 +275,16 @@ class App extends Component {
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
-                  <Table.Cell>
+                  <Table.Cell singleLine>
                     <Header as="h4" image>
                       <Icon
                         name={"user circle outline"}
                         color="green"
                         size="mini"
                       />
-                      <Header.Content>green team</Header.Content>
+                      <Header.Content>
+                        green team • {greenPercent}%
+                      </Header.Content>
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
@@ -266,14 +292,16 @@ class App extends Component {
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
-                  <Table.Cell>
+                  <Table.Cell singleLine>
                     <Header as="h4" image>
                       <Icon
                         name={"user circle outline"}
                         color="blue"
                         size="mini"
                       />
-                      <Header.Content>blue team</Header.Content>
+                      <Header.Content>
+                        blue team • {bluePercent}%
+                      </Header.Content>
                     </Header>
                   </Table.Cell>
                   <Table.Cell>
